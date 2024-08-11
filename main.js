@@ -2,7 +2,7 @@
 // app controls the application's event lifecycle.
 // BrowserWindow creates and manages the app windows.
 
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron/main");
 
 // path module from node.
 const path = require("node:path");
@@ -20,6 +20,7 @@ const createWindow = () => {
 
 // BrowserWindows can only be created after the app module's ready event is fired.
 app.whenReady().then(() => {
+  ipcMain.handle("ping", () => "pong");
   createWindow();
 });
 
